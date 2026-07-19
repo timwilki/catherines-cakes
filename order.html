@@ -74,6 +74,22 @@
                         <input type="text" id="occasionOther" name="occasionOther" placeholder="e.g. baby shower, retirement, christening">
                     </div>
 
+                    <div class="field">
+                        <label for="style">Cake Style</label>
+                        <select id="style" name="style">
+                            <option value="Victoria Sandwich">Victoria Sandwich</option>
+                            <option value="Christmas Cake">Christmas Cake</option>
+                            <option value="Carrot Cake">Carrot Cake</option>
+                            <option value="Chocolate Cake">Chocolate Cake</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field is-hidden" id="styleOtherWrap">
+                        <label for="styleOther">What style of cake would you like?</label>
+                        <input type="text" id="styleOther" name="styleOther" placeholder="e.g. red velvet, lemon drizzle, fruit cake">
+                    </div>
+
                     <div class="field-row">
                         <div class="field">
                             <label for="flavour">Preferred flavour <span class="optional">(up to 8, comma separated)</span></label>
@@ -92,11 +108,16 @@
                         </div>
                         <div class="field">
                             <label for="size">How big should the sponges be?</label>
-                            <input type="text" id="size" name="size" placeholder='e.g. 8" round / 20cm'>
+                            <select id="size" name="size">
+                                <option value="15.24cm">15.24cm</option>
+                                <option value="20.32cm">20.32cm</option>
+                                <option value="25.4cm">25.4cm</option>
+                                <option value="30.48cm">30.48cm</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="field">
+                    <div class="field is-hidden" id="shapeWrap">
                         <label for="shape">As the cake gets taller, should each sponge...</label>
                         <select id="shape" name="shape">
                             <option value="Stay the same size (stacked)">Stay the same size (stacked)</option>
@@ -145,6 +166,20 @@
         occasion.addEventListener('change', toggleOccasionOther);
         toggleOccasionOther();
 
+        // Show the "what style?" field only when "Other" cake style is selected.
+        const style = document.getElementById('style');
+        const styleOtherWrap = document.getElementById('styleOtherWrap');
+        const styleOther = document.getElementById('styleOther');
+
+        function toggleStyleOther() {
+            const isOther = style.value === 'Other';
+            styleOtherWrap.classList.toggle('is-hidden', !isOther);
+            styleOther.required = isOther;
+            if (!isOther) styleOther.value = '';
+        }
+        style.addEventListener('change', toggleStyleOther);
+        toggleStyleOther();
+
         // Limit the preferred flavour field to a maximum of 8 flavours.
         const flavour = document.getElementById('flavour');
         function countFlavours(value) {
@@ -158,6 +193,17 @@
             }
         }
         flavour.addEventListener('input', validateFlavours);
+
+        // Show the sponge-shape field only when there's more than one layer.
+        const layers = document.getElementById('layers');
+        const shapeWrap = document.getElementById('shapeWrap');
+
+        function toggleShape() {
+            const multipleLayers = Number(layers.value) > 1;
+            shapeWrap.classList.toggle('is-hidden', !multipleLayers);
+        }
+        layers.addEventListener('input', toggleShape);
+        toggleShape();
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -176,11 +222,12 @@
                     `Phone: ${data.get('phone') || '-'}`,
                     `Date needed: ${data.get('date')}`,
                     `Occasion: ${data.get('occasion') === 'Other' ? (data.get('occasionOther') || 'Other') : data.get('occasion')}`,
+                    `Cake style: ${data.get('style') === 'Other' ? (data.get('styleOther') || 'Other') : data.get('style')}`,
                     `Flavour: ${data.get('flavour') || '-'}`,
                     `Servings: ${data.get('servings') || '-'}`,
                     `Layers: ${data.get('layers') || '-'}`,
                     `Sponge size: ${data.get('size') || '-'}`,
-                    `Sponge shape: ${data.get('shape')}`,
+                    `Sponge shape: ${Number(data.get('layers')) > 1 ? data.get('shape') : 'n/a (single layer)'}`,
                     '',
                     'Design & details:',
                     data.get('details')
@@ -194,6 +241,8 @@
             note.classList.add('show');
             form.reset();
             toggleOccasionOther();
+            toggleStyleOther();
+            toggleShape();
         });
     </script>
 </body>
