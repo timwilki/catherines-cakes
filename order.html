@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order a Cake — Catherine's Cakes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-frame">
+        <!-- Flowery border -->
+        <div class="flower-border" aria-hidden="true">
+            <img class="flower-corner corner-tl" src="images/flower-png-17937.png" alt="">
+            <img class="flower-corner corner-tr" src="images/flower-png-17937.png" alt="">
+            <img class="flower-corner corner-bl" src="images/flower-png-17937.png" alt="">
+            <img class="flower-corner corner-br" src="images/flower-png-17937.png" alt="">
+        </div>
+
+        <main class="content">
+            <!-- Hero -->
+            <header class="hero">
+                <h1>Catherine's Cakes</h1>
+                <p class="strapline">you design, I bake and decorate</p>
+            </header>
+
+            <!-- Back to home -->
+            <div class="nav-cta">
+                <button type="button" class="nav-btn" onclick="window.location.href='index.html'">Back to Home</button>
+            </div>
+
+            <!-- Order form -->
+            <section class="order" aria-labelledby="order-heading">
+                <h2 id="order-heading">Order a Cake</h2>
+                <p class="order-intro">Tell me about your dream cake and I'll get back to you with a quote. The more detail the better!</p>
+
+                <form class="order-form" id="orderForm" novalidate>
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" autocomplete="name" required>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email" required>
+                        </div>
+                        <div class="field">
+                            <label for="phone">Phone <span class="optional">(optional)</span></label>
+                            <input type="tel" id="phone" name="phone" autocomplete="tel">
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="date">Date needed</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="field">
+                            <label for="occasion">Occasion</label>
+                            <select id="occasion" name="occasion">
+                                <option value="Birthday">Birthday</option>
+                                <option value="Wedding">Wedding</option>
+                                <option value="Anniversary">Anniversary</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field is-hidden" id="occasionOtherWrap">
+                        <label for="occasionOther">What's the occasion?</label>
+                        <input type="text" id="occasionOther" name="occasionOther" placeholder="e.g. baby shower, retirement, christening">
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="flavour">Preferred flavour <span class="optional">(up to 8, comma separated)</span></label>
+                            <input type="text" id="flavour" name="flavour" placeholder="e.g. chocolate, lemon, vanilla">
+                        </div>
+                        <div class="field">
+                            <label for="servings">Number of servings</label>
+                            <input type="number" id="servings" name="servings" min="1" max="50" placeholder="e.g. 12">
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="layers">How many layers?</label>
+                            <input type="number" id="layers" name="layers" min="1" max="8" placeholder="e.g. 3">
+                        </div>
+                        <div class="field">
+                            <label for="size">How big should the sponges be?</label>
+                            <input type="text" id="size" name="size" placeholder='e.g. 8" round / 20cm'>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="shape">As the cake gets taller, should each sponge...</label>
+                        <select id="shape" name="shape">
+                            <option value="Stay the same size (stacked)">Stay the same size (stacked)</option>
+                            <option value="Decrease in size (tiered)">Decrease in size (tiered)</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="details">Design &amp; details</label>
+                        <textarea id="details" name="details" rows="5" placeholder="Colours, theme, dietary requirements, inspiration..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send my request</button>
+                    <p class="form-note" id="formNote" role="status"></p>
+                </form>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; <span id="year"></span> Catherine's Cakes &mdash; you design, I bake and decorate</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // NOTE: This form is not yet connected to email/a backend.
+        // Update ORDER_EMAIL below with Catherine's real address to enable
+        // the "open in email app" fallback.
+        const ORDER_EMAIL = ''; // e.g. 'hello@catherinescakes.co.uk'
+
+        const form = document.getElementById('orderForm');
+        const note = document.getElementById('formNote');
+
+        // Show the "what's the occasion?" field only when "Other" is selected.
+        const occasion = document.getElementById('occasion');
+        const occasionOtherWrap = document.getElementById('occasionOtherWrap');
+        const occasionOther = document.getElementById('occasionOther');
+
+        function toggleOccasionOther() {
+            const isOther = occasion.value === 'Other';
+            occasionOtherWrap.classList.toggle('is-hidden', !isOther);
+            occasionOther.required = isOther;
+            if (!isOther) occasionOther.value = '';
+        }
+        occasion.addEventListener('change', toggleOccasionOther);
+        toggleOccasionOther();
+
+        // Limit the preferred flavour field to a maximum of 8 flavours.
+        const flavour = document.getElementById('flavour');
+        function countFlavours(value) {
+            return value.split(',').map(f => f.trim()).filter(Boolean).length;
+        }
+        function validateFlavours() {
+            if (countFlavours(flavour.value) > 8) {
+                flavour.setCustomValidity('Please list no more than 8 flavours.');
+            } else {
+                flavour.setCustomValidity('');
+            }
+        }
+        flavour.addEventListener('input', validateFlavours);
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            validateFlavours();
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const data = new FormData(form);
+            if (ORDER_EMAIL) {
+                const subject = `Cake request from ${data.get('name')}`;
+                const bodyLines = [
+                    `Name: ${data.get('name')}`,
+                    `Email: ${data.get('email')}`,
+                    `Phone: ${data.get('phone') || '-'}`,
+                    `Date needed: ${data.get('date')}`,
+                    `Occasion: ${data.get('occasion') === 'Other' ? (data.get('occasionOther') || 'Other') : data.get('occasion')}`,
+                    `Flavour: ${data.get('flavour') || '-'}`,
+                    `Servings: ${data.get('servings') || '-'}`,
+                    `Layers: ${data.get('layers') || '-'}`,
+                    `Sponge size: ${data.get('size') || '-'}`,
+                    `Sponge shape: ${data.get('shape')}`,
+                    '',
+                    'Design & details:',
+                    data.get('details')
+                ];
+                const href = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+                window.location.href = href;
+                note.textContent = 'Opening your email app to send the request...';
+            } else {
+                note.textContent = 'Thank you! Your request has been noted. (This form isn\u2019t connected to email yet \u2014 add an address to start receiving orders.)';
+            }
+            note.classList.add('show');
+            form.reset();
+            toggleOccasionOther();
+        });
+    </script>
+</body>
+</html>
