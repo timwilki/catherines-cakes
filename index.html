@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catherine's Cakes — you design, I bake and decorate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-frame">
+        <!-- Flowery border -->
+        <div class="flower-border" aria-hidden="true">
+            <img class="flower-corner corner-tl" src="images/flower-png-17937.png" alt="">
+            <img class="flower-corner corner-tr" src="images/flower-png-17937.png" alt="">
+            <img class="flower-corner corner-bl" src="images/flower-png-17937.png" alt="">
+            <img class="flower-corner corner-br" src="images/flower-png-17937.png" alt="">
+        </div>
+
+        <main class="content">
+            <!-- Hero -->
+            <header class="hero">
+                <h1>Catherine's Cakes</h1>
+                <p class="strapline">you design, I bake and decorate</p>
+            </header>
+
+            <!-- Cake gallery placeholder -->
+            <section class="gallery" aria-labelledby="gallery-heading">
+                <h2 id="gallery-heading">Cakes I've baked</h2>
+                <div class="gallery-grid">
+                    <figure class="cake-card">
+                        <img src="images/IMG_4460.JPG" alt="Chocolate cake with caramel shards and gold chocolate drops" loading="lazy">
+                    </figure>
+                    <figure class="cake-card">
+                        <img src="images/IMG_4559.JPG" alt="Orange birthday cake topped with candied orange slices" loading="lazy">
+                    </figure>
+                    <figure class="cake-card">
+                        <img src="images/IMG_4732.JPG" alt="Tall chocolate cake decorated with a strawberry, blueberries and mint" loading="lazy">
+                    </figure>
+                </div>
+            </section>
+
+            <!-- Contact placeholder -->
+            <section class="contact" aria-labelledby="contact-heading">
+                <h2 id="contact-heading">Get in Touch</h2>
+                <div class="contact-card">
+                    <p class="contact-placeholder">Contact details coming soon</p>
+                    <ul class="contact-list">
+                        <li><span class="contact-icon">&#9993;</span> Email: <em>coming soon</em></li>
+                        <li><span class="contact-icon">&#128241;</span> Phone: <em>coming soon</em></li>
+                        <li><span class="contact-icon">&#128247;</span> Social: <em>coming soon</em></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; <span id="year"></span> Catherine's Cakes &mdash; you design, I bake and decorate</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

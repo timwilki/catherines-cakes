@@ -1,0 +1,201 @@
+:root {
+    --pink: #FFE2F1;
+    --mint: #C8E8E3;
+    --yellow: #FFF7B3;
+    --ink: #6b4a5a;
+    --ink-soft: #8a6b78;
+    --white: #fffdfa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 15% 20%, var(--pink) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, var(--yellow) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, var(--mint) 0%, transparent 50%),
+        var(--white);
+    min-height: 100vh;
+    padding: clamp(12px, 3vw, 32px);
+    line-height: 1.6;
+}
+
+/* Outer frame that holds the flowery border */
+.page-frame {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 28px;
+    padding: clamp(20px, 4vw, 48px);
+    box-shadow: 0 20px 60px rgba(200, 140, 170, 0.25);
+    overflow: hidden;
+}
+
+/* ---- Flowery border ---- */
+.flower-border {
+    position: absolute;
+    inset: 14px;
+    border: 3px dashed var(--mint);
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Floral corner decorations */
+.flower-corner {
+    position: absolute;
+    width: clamp(110px, 20vw, 220px);
+    height: auto;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.corner-tl { top: -12px; left: -12px; }
+.corner-tr { top: -12px; right: -12px; transform: scaleX(-1); }
+.corner-bl { bottom: -12px; left: -12px; transform: scaleY(-1); }
+.corner-br { bottom: -12px; right: -12px; transform: rotate(180deg); }
+
+/* ---- Content ---- */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(16px, 3vw, 40px);
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: clamp(24px, 6vw, 72px) 16px clamp(20px, 4vw, 48px);
+}
+
+.hero h1 {
+    font-family: 'Parisienne', cursive;
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 400;
+    color: var(--ink);
+    text-shadow: 2px 3px 0 var(--pink), 4px 6px 0 rgba(200, 232, 227, 0.6);
+    line-height: 1.05;
+}
+
+.strapline {
+    margin-top: 0.5rem;
+    font-size: clamp(1.1rem, 3.2vw, 1.6rem);
+    font-weight: 500;
+    color: var(--ink-soft);
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Section headings */
+section {
+    margin-top: clamp(32px, 6vw, 64px);
+}
+
+section h2 {
+    text-align: center;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: clamp(20px, 3vw, 32px);
+    color: var(--ink);
+}
+
+section h2::after {
+    content: "";
+    display: block;
+    width: 72px;
+    height: 4px;
+    margin: 12px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--pink), var(--yellow), var(--mint));
+}
+
+/* Gallery placeholders */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(16px, 3vw, 28px);
+}
+
+.cake-card {
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--pink), var(--mint));
+    border: 4px solid var(--white);
+    box-shadow: 0 8px 24px rgba(200, 140, 170, 0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cake-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 34px rgba(200, 140, 170, 0.35);
+}
+
+.cake-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Contact */
+.contact-card {
+    max-width: 520px;
+    margin: 0 auto;
+    background: var(--yellow);
+    border-radius: 24px;
+    padding: clamp(24px, 4vw, 40px);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(200, 180, 90, 0.2);
+}
+
+.contact-placeholder {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.contact-list {
+    list-style: none;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.contact-list li {
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.contact-icon {
+    display: inline-block;
+    width: 1.6em;
+}
+
+.contact-list em {
+    color: var(--ink-soft);
+}
+
+/* Footer */
+.site-footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: clamp(32px, 6vw, 56px);
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
