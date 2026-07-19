@@ -2,8 +2,8 @@
     --pink: #FFE2F1;
     --mint: #C8E8E3;
     --yellow: #FFF7B3;
-    --ink: #6b4a5a;
-    --ink-soft: #8a6b78;
+    --ink: #FCC3E1;
+    --ink-soft: #FCC3E1;
     --white: #fffdfa;
 }
 
@@ -129,10 +129,10 @@ section h2::after {
 
 .cake-card {
     margin: 0;
-    aspect-ratio: 4 / 3;
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--pink), var(--mint));
     border: 4px solid var(--white);
     box-shadow: 0 8px 24px rgba(200, 140, 170, 0.22);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -145,9 +145,22 @@ section h2::after {
 
 .cake-card img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+}
+
+.cake-card figcaption {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+    background: var(--white);
 }
 
 /* Contact */
