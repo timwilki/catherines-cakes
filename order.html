@@ -36,7 +36,7 @@
                 <h2 id="order-heading">Order a Cake</h2>
                 <p class="order-intro">Tell me about your dream cake and I'll get back to you with a quote. The more detail the better!</p>
 
-                <form class="order-form" id="orderForm" novalidate>
+                <form class="order-form" id="orderForm" action="https://formspree.io/f/xqpajgdw" method="POST" >
                     <div class="field">
                         <label for="name">Your name</label>
                         <input type="text" id="name" name="name" autocomplete="name" required>
@@ -91,10 +91,7 @@
                     </div>
 
                     <div class="field-row">
-                        <div class="field">
-                            <label for="flavour">Preferred flavour <span class="optional">(up to 8, comma separated)</span></label>
-                            <input type="text" id="flavour" name="flavour" placeholder="e.g. chocolate, lemon, vanilla">
-                        </div>
+                     
                         <div class="field">
                             <label for="servings">Number of servings</label>
                             <input type="number" id="servings" name="servings" min="1" max="50" placeholder="e.g. 12">
@@ -103,16 +100,13 @@
 
                     <div class="field-row">
                         <div class="field">
-                            <label for="layers">How many layers?</label>
-                            <input type="number" id="layers" name="layers" min="1" max="8" placeholder="e.g. 3">
+                            <label for="layers">How many layers? (max 10)</label>
+                            <input type="number" id="layers" name="layers" min="1" max="10" placeholder="e.g. 3">
                         </div>
                         <div class="field">
-                            <label for="size">How big should the sponges be?</label>
+                            <label for="size">How big should the sponges be? <em>(only 20cm available)</em></label>
                             <select id="size" name="size">
-                                <option value="15.24cm">15.24cm</option>
-                                <option value="20.32cm">20.32cm</option>
-                                <option value="25.4cm">25.4cm</option>
-                                <option value="30.48cm">30.48cm</option>
+                                <option value="20cm">20cm / 8inch</option>
                             </select>
                         </div>
                     </div>
